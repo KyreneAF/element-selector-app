@@ -46,7 +46,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             const script = document.createElement('script');
                             script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
                             script.onload = () => resolve(window.html2canvas);
-                            script.onerror = reject;
+                            script.onerror = () => {
+                                console.warn('html2canvas failed to load, screenshots will be disabled');
+                                resolve(null);
+                            };
                             document.head.appendChild(script);
                         });
                     }
@@ -60,11 +63,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             // Create highlight overlay
                             const highlight = document.createElement("div");
                             highlight.style.cssText = `
-                                position: absolute;
+                                position: fixed;
                                 border: 3px solid #4facfe;
                                 background: rgba(79, 172, 254, 0.1);
                                 pointer-events: none;
-                                z-index: 1000000;
+                                z-index: 2147483647;
                                 display: none;
                                 border-radius: 4px;
                                 box-shadow: 0 0 0 1px rgba(79, 172, 254, 0.3);
@@ -78,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 position: fixed;
                                 top: 20px;
                                 right: 20px;
-                                z-index: 1000001;
+                                z-index: 2147483647;
                                 padding: 12px 20px;
                                 background: #ff4757;
                                 color: white;
@@ -108,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 top: 20px;
                                 left: 50%;
                                 transform: translateX(-50%);
-                                z-index: 1000001;
+                                z-index: 2147483647;
                                 padding: 12px 24px;
                                 background: white;
                                 color: #1E293B;
@@ -191,14 +194,19 @@ document.addEventListener('DOMContentLoaded', function() {
                                 const selector = generateSelector(target);
                                 
                                 try {
-                                    const screenshot = await html2canvas(target, {
-                                        allowTaint: true,
-                                    });
-                                    
-                                    const result = { selector, screenshot: screenshot.toDataURL() };
-                                    console.log('Element selected:', result);
-                                    
-                                    if (onElementSelected) onElementSelected(result);
+                                    if (html2canvas) {
+                                        const screenshot = await html2canvas(target, {
+                                            allowTaint: true,
+                                        });
+                                        
+                                        const result = { selector, screenshot: screenshot.toDataURL() };
+                                        console.log('Element selected:', result);
+                                        
+                                        if (onElementSelected) onElementSelected(result);
+                                    } else {
+                                        console.log('Element selected (screenshot disabled):', { selector });
+                                        if (onElementSelected) onElementSelected({ selector });
+                                    }
                                 } catch (error) {
                                     console.log('Element selected (screenshot failed):', { selector });
                                     if (onElementSelected) onElementSelected({ selector });
