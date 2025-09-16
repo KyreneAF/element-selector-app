@@ -12,7 +12,7 @@ export function selectElement(onElementSelected, onSelectionStopped) {
       pointer-events: none;
       z-index: 999999;
       background: rgba(59, 130, 246, 0.2);
-      border: 2px solid #3B82F6;
+      border: 2px solid #fa01b3/*//#3B82F6*/;
       border-radius: 4px;
       transition: all 0.1s ease-out;
       box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
@@ -144,8 +144,9 @@ export function selectElement(onElementSelected, onSelectionStopped) {
             
             const target = getRealTarget(e);
             
-            // Don't highlight our UI elements
-            if (target === cancelBtn || target === banner || banner.contains(target)) {
+            // Don't highlight our UI elements or elements inside the control panel
+            if (target === cancelBtn || target === banner || banner.contains(target) ||
+                target.closest('.App-header')) {
                 highlight.style.display = "none";
                 return;
             }

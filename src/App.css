@@ -47,7 +47,7 @@
 }
 
 .select-button {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #fa01b3 0%, #c2185b 100%);
   color: white;
   border: none;
   padding: 16px 32px;
@@ -56,12 +56,12 @@
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
+  box-shadow: 0 8px 25px rgba(250, 1, 179, 0.3);
 }
 
 .select-button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 12px 35px rgba(79, 172, 254, 0.4);
+  box-shadow: 0 12px 35px rgba(250, 1, 179, 0.4);
 }
 
 .select-button:disabled {
@@ -160,24 +160,6 @@
 .clear-all-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
-}
-
-.undo-button {
-  background: linear-gradient(135deg, #ffa726 0%, #ff9800 100%);
-  color: white;
-  border: none;
-  padding: 16px 32px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 25px rgba(255, 167, 38, 0.3);
-}
-
-.undo-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 35px rgba(255, 167, 38, 0.4);
 }
 
 .test-elements {
@@ -378,6 +360,17 @@
 .selection-square:hover {
   transform: scale(1.02) !important;
   box-shadow: 0 0 0 2px rgba(79, 172, 254, 0.5) !important;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1000002;
 }
 
 @media (max-width: 768px) {

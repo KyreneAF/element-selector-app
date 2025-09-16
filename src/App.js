@@ -19,12 +19,12 @@ function App() {
       top: ${rect.top + window.scrollY}px;
       width: ${rect.width}px;
       height: ${rect.height}px;
-      border: 3px solid #4facfe;
-      background: rgba(79, 172, 254, 0.1);
+      border: 3px solid #fa01b3;
+      background: rgba(250, 1, 179, 0.1);
       pointer-events: auto;
       z-index: 999998;
       border-radius: 4px;
-      box-shadow: 0 0 0 1px rgba(79, 172, 254, 0.3);
+      box-shadow: 0 0 0 1px rgba(250, 1, 179, 0.3);
       cursor: pointer;
       transition: all 0.2s ease;
     `;
@@ -38,13 +38,13 @@ function App() {
 
     // Add hover effects
     square.addEventListener('mouseenter', () => {
-      square.style.background = 'rgba(79, 172, 254, 0.2)';
-      square.style.borderColor = '#00f2fe';
+      square.style.background = 'rgba(250, 1, 179, 0.2)';
+      square.style.borderColor = '#ff1493';
     });
 
     square.addEventListener('mouseleave', () => {
-      square.style.background = 'rgba(79, 172, 254, 0.1)';
-      square.style.borderColor = '#4facfe';
+      square.style.background = 'rgba(250, 1, 179, 0.1)';
+      square.style.borderColor = '#fa01b3';
     });
 
     document.body.appendChild(square);
@@ -118,14 +118,6 @@ function App() {
     setIsSelecting(false);
   };
 
-  const undoLastSelection = () => {
-    if (selectedElements.length > 0) {
-      const lastElement = selectedElements[selectedElements.length - 1];
-      removeElement(lastElement.id);
-      console.log('Undid selection:', lastElement.selector);
-    }
-  };
-
   const toggleSelection = async () => {
     if (isSelecting) {
       // Stop selection mode
@@ -186,7 +178,7 @@ function App() {
         <p className="instruction-text">
           {isSelecting 
             ? 'Selection mode active! Click elements to select them. Click the button again to stop.'
-            : 'Selected elements will have blue squares around them. Click the squares to deselect.'
+            : 'Selected elements will have pink squares around them. Click the squares to deselect.'
           }
         </p>
         
@@ -196,18 +188,12 @@ function App() {
               onClick={toggleSelection}
               className={`select-button ${isSelecting ? 'selecting' : ''}`}
             >
-              {isSelecting ? 'Stop Selection' : 'Start Selection'}
+              Start Selection
             </button>
             
             {selectedElements.length > 0 && (
               <button onClick={clearAllSelections} className="clear-all-button">
                 Clear All ({selectedElements.length})
-              </button>
-            )}
-            
-            {selectedElements.length > 0 && (
-              <button onClick={undoLastSelection} className="undo-button">
-                Undo Last Selection
               </button>
             )}
           </div>
