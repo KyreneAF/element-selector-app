@@ -10,18 +10,5 @@
   "action": {
     "default_popup": "popup.html",
     "default_title": "Element Selector"
-  },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"],
-      "run_at": "document_end"
-    }
-  ],
-  "web_accessible_resources": [
-    {
-      "resources": ["elementSelector.js"],
-      "matches": ["<all_urls>"]
-    }
-  ]
+  }
 }
