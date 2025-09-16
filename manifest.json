@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Element Selector",
+  "version": "1.0.0",
+  "description": "Select elements on any webpage with visual feedback and CSS selector generation",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Element Selector"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["elementSelector.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
